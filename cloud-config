@@ -1,0 +1,37 @@
+#cloud-config
+
+coreos:
+  units:
+    - name: docker-tcp.socket
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=Docker Socket for the API
+
+        [Socket]
+        ListenStream=2375
+        BindIPv6Only=both
+        Service=docker.service
+
+        [Install]
+        WantedBy=sockets.target
+    - name: scheduler.service
+      command: start
+      content: |
+        [Unit]
+        Description=Set io scheduler to noop for ssds
+
+        [Service]
+        Type=oneshot
+        ExecStart=/bin/bash -l -c 'echo noop > /sys/block/sda/queue/scheduler'
+    - name: stop-update-engine.service
+      command: start
+      content: |
+        [Unit]
+        Description=stop update-engine
+
+        [Service]
+        Type=oneshot
+        ExecStart=/usr/bin/systemctl stop update-engine.service
+        ExecStartPost=/usr/bin/systemctl mask update-engine.service
