@@ -1,1 +1,0 @@
-{"nfs":{"core":{"id":"core","nfs":true,"mount_options":["nolock,vers=3,udp"],"guestpath":"/home/core/projects","hostpath":"/Users/josh/projects","disabled":false,"type":"nfs","map_uid":501,"map_gid":20,"nfs_udp":true,"nfs_version":3,"uuid":"3601328094"}}}
