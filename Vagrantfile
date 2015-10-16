@@ -12,10 +12,10 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "#{ENV['HOME']}/projects", "/home/core/projects", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp'] 
 
   config.vm.provider :virtualbox do |v|
-    v.name = "coreos-vm"
+    v.name = "docker-vm"
     v.customize [
         "modifyvm", :id,
-        "--name", "coreos-vm",
+        "--name", "docker-vm",
         "--memory", 2048,
         "--natdnshostresolver1", "on",
         "--cpus", 4,
